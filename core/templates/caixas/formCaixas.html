@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Formulário de Caixas{% endblock titulo %}
+
+{% block conteudo %}
+<form class="form-horizontal" action="/caixas/salvar/" method="POST" role="form">{% csrf_token %}
+
+    <input type="hidden" id="codigo" name="codigo" value="{{ caixas.pk|default_if_none:'0' }}">
+
+    <div class="form-group">
+        <label for="pessoa_id" class="col-sm-2 control-label">Pessoa</label>
+        <div class="col-sm-10">
+            <select name="pessoa_id">
+                <option value="1">Leonardo Lopes</option>
+            </select>
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label for="idTipo" class="col-sm-2 control-label">Tipo</label>
+        <div class="col-sm-10">
+            <input name="tipo" id="idTipo" value="{{ caixas.tipo|default_if_none:'' }}" type="text" class="form-control"  placeholder="Tipo">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="idDescricao" class="col-sm-2 control-label">Descrição</label>
+        <div class="col-sm-5">
+            <input name="descricao" id="idDescricao" value="{{ caixas.descricao|default_if_none:'' }}" type="text" class="form-control"  placeholder="Descrição">
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label for="idValor" class="col-sm-2 control-label">Valor</label>
+        <div class="col-sm-5">
+            <input name="valor" id="idValor" value="{{ caixas.valor|default_if_none:'' }}" type="text" class="form-control"  placeholder="Valor">
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label for="idPagseguro" class="col-sm-2 control-label">Pagseguro</label>
+        <div class="col-sm-5">
+            <input name="pagseguro" id="idPagseguro" value="{{ caixas.pagseguro|default_if_none:'' }}" type="text" class="form-control"  placeholder="Pagseguro">
+        </div>
+    </div>
+      
+    <div class="form-group">
+        <label for="idData" class="col-sm-2 control-label">Data</label>
+        <div class="col-sm-5">
+          <input name="data" id="idData" value="{{ caixas.data|default_if_none:'' }}" type="text" class="form-control"  placeholder="00/00/0000">
+        </div>
+    </div>
+  
+    <hr>
+
+    <div align="center">
+        <button type="submit" class="btn btn-success">Salvar Registro</button>
+        {% if caixas.pk > 0 %}
+        <a class="btn btn-danger" href="/caixas/excluir/{{ caixas.pk }}/">Excluir</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock conteudo %}
